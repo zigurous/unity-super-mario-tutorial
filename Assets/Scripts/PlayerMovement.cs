@@ -1,26 +1,30 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    private new Rigidbody2D rigidbody;
     private new Camera camera;
+    private new Rigidbody2D rigidbody;
 
-    public float moveSpeed = 6f;
-    public float acceleration = 0.5f;
+    public float moveSpeed = 8f;
+    public float acceleration = 0.75f;
     public float deceleration = 0.25f;
     public float maxJumpHeight = 4.5f;
     public float maxJumpTime = 1f;
 
     private Vector2 velocity;
+    private bool jumping;
     private float damping;
+
+    public Vector2 Velocity => velocity;
+    public bool IsJumping => jumping;
 
     private void Awake()
     {
         Application.targetFrameRate = 60;
 
-        rigidbody = GetComponent<Rigidbody2D>();
         camera = Camera.main;
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -83,6 +87,7 @@ public class Player : MonoBehaviour
     {
         // prevent gravity from infinitly building up
         velocity.y = Mathf.Max(velocity.y, 0f);
+        jumping = velocity.y > 0f;
 
         // perform jump
         if (Input.GetButtonDown("Jump"))
@@ -90,6 +95,7 @@ public class Player : MonoBehaviour
             // calculate jump velocity
             float timeToApex = maxJumpTime / 2f;
             velocity.y = (2f * maxJumpHeight) / timeToApex;
+            jumping = true;
         }
     }
 
@@ -97,7 +103,7 @@ public class Player : MonoBehaviour
     {
         // check if bonked head
         if (Raycast(Vector2.up)) {
-            velocity.y = Mathf.Min(velocity.y, 0f);
+            velocity.y = 0f;
         }
     }
 
@@ -113,6 +119,9 @@ public class Player : MonoBehaviour
 
         // apply gravity
         velocity.y += gravity * multiplier * Time.deltaTime;
+
+        // terminal velocity
+        velocity.y = Mathf.Max(velocity.y, gravity / 2f);
     }
 
     private bool Raycast(Vector2 direction)
