@@ -5,19 +5,21 @@ public class PlayerMovement : MonoBehaviour
 {
     private new Camera camera;
     private new Rigidbody2D rigidbody;
+    private new Collider2D collider;
+    private Vector2 velocity;
+    private bool grounded;
+    private bool jumping;
 
+    [Header("Physics")]
     public float moveSpeed = 8f;
-    public float acceleration = 0.75f;
-    public float deceleration = 0.25f;
-    public float maxJumpHeight = 4.5f;
+    public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
 
-    private Vector2 velocity;
-    private bool jumping;
-    private float damping;
-
-    public Vector2 Velocity => velocity;
-    public bool IsJumping => jumping;
+    [Header("Sprites")]
+    public SpriteRenderer idle;
+    public SpriteRenderer run;
+    public SpriteRenderer jump;
+    public SpriteRenderer slide;
 
     private void Awake()
     {
@@ -25,13 +27,33 @@ public class PlayerMovement : MonoBehaviour
 
         camera = Camera.main;
         rigidbody = GetComponent<Rigidbody2D>();
+        collider = GetComponent<Collider2D>();
+    }
+
+    private void OnEnable()
+    {
+        collider.enabled = true;
+        velocity = Vector2.zero;
+    }
+
+    private void OnDisable()
+    {
+        collider.enabled = false;
+        velocity = Vector2.zero;
+
+        idle.gameObject.SetActive(true);
+        run.gameObject.SetActive(false);
+        jump.gameObject.SetActive(false);
+        slide.gameObject.SetActive(false);
     }
 
     private void Update()
     {
         HorizontalMovement();
 
-        if (Raycast(Vector2.down)) {
+        grounded = rigidbody.Raycast(Vector2.down);
+
+        if (grounded) {
             GroundedMovement();
         } else {
             AirborneMovement();
@@ -42,36 +64,40 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 position = rigidbody.position;
         Vector3 leftEdge = camera.ScreenToWorldPoint(Vector3.zero);
+        Vector3 rightEdge = camera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
 
+        Vector2 position = rigidbody.position;
         position += velocity * Time.fixedDeltaTime;
-        position.x = Mathf.Max(position.x, leftEdge.x + 0.5f);
+        position.x = Mathf.Clamp(position.x, leftEdge.x + 0.5f, rightEdge.x - 0.5f);
 
         rigidbody.MovePosition(position);
     }
 
     private void LateUpdate()
     {
-        Vector3 cameraPosition = camera.transform.position;
-        cameraPosition.x = Mathf.Max(cameraPosition.x, transform.position.x);
-        camera.transform.position = cameraPosition;
+        float axis = Input.GetAxis("Horizontal");
+        float velocityX = Mathf.Abs(velocity.x);
+
+        bool running = velocityX > 0.25f || axis != 0f;
+        bool slidingLeft = axis > 0f && velocity.x < 0f;
+        bool slidingRight = axis < 0f && velocity.x > 0f;
+        bool sliding = slidingLeft || slidingRight;
+
+        jump.gameObject.SetActive(jumping);
+        slide.gameObject.SetActive(!jumping && running && sliding);
+        run.gameObject.SetActive(!jumping && running && !sliding);
+        idle.gameObject.SetActive(!jumping && !running && !sliding);
     }
 
     private void HorizontalMovement()
     {
-        // get horizontal input
-        float axis = Input.GetAxis("Horizontal") * moveSpeed;
-
         // accelerate / decelerate
-        if (Mathf.Abs(axis) > Mathf.Abs(velocity.x)) {
-            velocity.x = Mathf.SmoothDamp(velocity.x, axis, ref damping, acceleration);
-        } else {
-            velocity.x = Mathf.SmoothDamp(velocity.x, axis, ref damping, deceleration);
-        }
+        float axis = Input.GetAxis("Horizontal");
+        velocity.x = Mathf.MoveTowards(velocity.x, axis * moveSpeed, moveSpeed * Time.deltaTime);
 
         // check if running into a wall
-        if (Raycast(Vector2.right * velocity.x)) {
+        if (rigidbody.Raycast(Vector2.right * velocity.x)) {
             velocity.x = 0f;
         }
 
@@ -102,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
     private void AirborneMovement()
     {
         // check if bonked head
-        if (Raycast(Vector2.up)) {
+        if (velocity.y > 0f && rigidbody.Raycast(Vector2.up)) {
             velocity.y = 0f;
         }
     }
@@ -119,21 +145,7 @@ public class PlayerMovement : MonoBehaviour
 
         // apply gravity
         velocity.y += gravity * multiplier * Time.deltaTime;
-
-        // terminal velocity
         velocity.y = Mathf.Max(velocity.y, gravity / 2f);
-    }
-
-    private bool Raycast(Vector2 direction)
-    {
-        float pixelSize = 1f / 16f;
-        float distance = pixelSize * 2f;
-        float radius = (1f - distance) / 2f;
-
-        LayerMask layerMask = LayerMask.GetMask("Default");
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius, direction.normalized, distance, layerMask);
-
-        return hit.collider != null && hit.rigidbody != this.rigidbody;
     }
 
 }
