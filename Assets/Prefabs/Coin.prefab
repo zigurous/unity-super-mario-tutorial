@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 841438207429839043}
   - component: {fileID: 841438207429839044}
-  - component: {fileID: 841438207429839041}
+  - component: {fileID: 1730642940032789244}
   - component: {fileID: 841438207429839042}
   m_Layer: 7
   m_Name: Coin
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c7111107e01db6468b7962b774d337e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &841438207429839041
+--- !u!61 &1730642940032789244
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
