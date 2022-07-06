@@ -27,6 +27,8 @@ public class Pipe : MonoBehaviour
         yield return MoveToPosition(mario, enteredPosition);
         yield return new WaitForSeconds(1f);
 
+        Camera.main.GetComponent<SideScrolling>().SetUnderground(connection.position.y < 0f);
+
         if (exitDirection != Vector3.zero)
         {
             mario.position = connection.position - exitDirection;
