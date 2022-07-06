@@ -17,7 +17,7 @@ public class FlagPole : MonoBehaviour
         }
     }
 
-    private IEnumerator MoveToPosition(Transform transform, Vector3 position)
+    private IEnumerator MoveToPosition(Transform transform, Vector2 position)
     {
         while (Vector2.Distance(transform.position, position) > 0.125f)
         {
@@ -40,7 +40,7 @@ public class FlagPole : MonoBehaviour
 
         mario.gameObject.SetActive(false);
 
-        FindObjectOfType<GameManager>().NextLevel();
+        GameManager.Instance.NextLevel();
     }
 
 }

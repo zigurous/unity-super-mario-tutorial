@@ -7,7 +7,6 @@ public class Pipe : MonoBehaviour
     public KeyCode enterKeyCode = KeyCode.S;
     public Vector3 enterDirection = Vector3.down;
     public Vector3 exitDirection = Vector3.zero;
-    public float animationDuration = 1f;
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -26,7 +25,7 @@ public class Pipe : MonoBehaviour
         Vector3 enteredPosition = transform.position + enterDirection;
 
         yield return MoveToPosition(mario, enteredPosition);
-        yield return new WaitForSeconds(animationDuration);
+        yield return new WaitForSeconds(1f);
 
         if (exitDirection != Vector3.zero)
         {
@@ -38,15 +37,15 @@ public class Pipe : MonoBehaviour
         mario.GetComponent<PlayerMovement>().enabled = true;
     }
 
-    private IEnumerator MoveToPosition(Transform mario, Vector3 endPosition)
+    private IEnumerator MoveToPosition(Transform mario, Vector3 endPosition, float duration = 1f)
     {
         float elapsed = 0f;
 
         Vector3 startPosition = mario.position;
 
-        while (elapsed < animationDuration)
+        while (elapsed < duration)
         {
-            float t = elapsed / animationDuration;
+            float t = elapsed / duration;
 
             mario.position = Vector3.Lerp(startPosition, endPosition, t);
             elapsed += Time.deltaTime;

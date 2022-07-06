@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 8f;
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
+    public float jumpVelocity => (2f * maxJumpHeight) / (maxJumpTime / 2f);
+    public float gravity => (-2f * maxJumpHeight) / Mathf.Pow(maxJumpTime / 2f, 2f);
 
     [Header("Sprites")]
     public SpriteRenderer idle;
@@ -41,10 +43,10 @@ public class PlayerMovement : MonoBehaviour
         collider.enabled = false;
         velocity = Vector2.zero;
 
-        idle.gameObject.SetActive(true);
-        run.gameObject.SetActive(false);
-        jump.gameObject.SetActive(false);
-        slide.gameObject.SetActive(false);
+        idle.enabled = true;
+        run.enabled = false;
+        jump.enabled = false;
+        slide.enabled = false;
     }
 
     private void Update()
@@ -64,11 +66,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 leftEdge = camera.ScreenToWorldPoint(Vector3.zero);
-        Vector3 rightEdge = camera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-
+        // move mario based on his velocity
         Vector2 position = rigidbody.position;
         position += velocity * Time.fixedDeltaTime;
+
+        // clamp within the screen bounds
+        Vector3 leftEdge = camera.ScreenToWorldPoint(Vector3.zero);
+        Vector3 rightEdge = camera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         position.x = Mathf.Clamp(position.x, leftEdge.x + 0.5f, rightEdge.x - 0.5f);
 
         rigidbody.MovePosition(position);
@@ -79,15 +83,17 @@ public class PlayerMovement : MonoBehaviour
         float axis = Input.GetAxis("Horizontal");
         float velocityX = Mathf.Abs(velocity.x);
 
+        // determine animation state
         bool running = velocityX > 0.25f || axis != 0f;
         bool slidingLeft = axis > 0f && velocity.x < 0f;
         bool slidingRight = axis < 0f && velocity.x > 0f;
         bool sliding = slidingLeft || slidingRight;
 
-        jump.gameObject.SetActive(jumping);
-        slide.gameObject.SetActive(!jumping && running && sliding);
-        run.gameObject.SetActive(!jumping && running && !sliding);
-        idle.gameObject.SetActive(!jumping && !running && !sliding);
+        // enable/disable sprites
+        jump.enabled = jumping;
+        slide.enabled = !jumping && running && sliding;
+        run.enabled = !jumping && running && !sliding;
+        idle.enabled = !jumping && !running && !sliding;
     }
 
     private void HorizontalMovement()
@@ -118,9 +124,7 @@ public class PlayerMovement : MonoBehaviour
         // perform jump
         if (Input.GetButtonDown("Jump"))
         {
-            // calculate jump velocity
-            float timeToApex = maxJumpTime / 2f;
-            velocity.y = (2f * maxJumpHeight) / timeToApex;
+            velocity.y = jumpVelocity;
             jumping = true;
         }
     }
@@ -135,15 +139,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyGravity()
     {
-        // calculate gravity
-        float timeToApex = maxJumpTime / 2f;
-        float gravity = (-2f * maxJumpHeight) / Mathf.Pow(timeToApex, 2f);
-
         // check if falling
         bool falling = velocity.y < 0f || !Input.GetButton("Jump");
         float multiplier = falling ? 2f : 1f;
 
-        // apply gravity
+        // apply gravity and terminal velocity
         velocity.y += gravity * multiplier * Time.deltaTime;
         velocity.y = Mathf.Max(velocity.y, gravity / 2f);
     }

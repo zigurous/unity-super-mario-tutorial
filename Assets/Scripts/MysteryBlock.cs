@@ -17,7 +17,7 @@ public class MysteryBlock : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = emptyBlock;
 
         if (powerUp.type == PowerUp.Type.Coin) {
-            FindObjectOfType<GameManager>().AddCoin();
+            GameManager.Instance.AddCoin();
         } else {
             Instantiate(powerUp, transform.position + Vector3.up, Quaternion.identity);
         }

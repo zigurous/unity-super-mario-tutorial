@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4953937513092463114}
   - component: {fileID: 2262214753697499689}
   - component: {fileID: 3476804150155684021}
-  - component: {fileID: 6658876916697956947}
+  - component: {fileID: 5173599791073248378}
   - component: {fileID: 4036622396060348869}
   - component: {fileID: 8863421987694266431}
   m_Layer: 6
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!61 &6658876916697956947
+--- !u!61 &5173599791073248378
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

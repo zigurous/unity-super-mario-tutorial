@@ -24,11 +24,11 @@ public class SideScrolling : MonoBehaviour
         cameraPosition.x = Mathf.Max(cameraPosition.x, player.position.x);
 
         // set height offset for above/below ground
-        if (player.position.y < undergroundThreshold) {
-            cameraPosition.y = undergroundHeight;
-        } else {
-            cameraPosition.y = height;
-        }
+        // if (player.position.y < undergroundThreshold) {
+        //     cameraPosition.y = undergroundHeight;
+        // } else {
+        //     cameraPosition.y = height;
+        // }
 
         transform.position = cameraPosition;
     }
