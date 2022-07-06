@@ -148,8 +148,6 @@ public class PlayerMovement : MonoBehaviour
         // check if mario is falling onto the head of an enemy
         if (falling && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            other.gameObject.SetActive(false);
-
             // bounce off enemy head
             velocity.y = jumpVelocity / 2f;
             jumping = true;
