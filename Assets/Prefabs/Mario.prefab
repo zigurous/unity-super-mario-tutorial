@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  maxJumpHeight: 5
+  maxJumpHeight: 4.5
   maxJumpTime: 1
   idle: {fileID: 5182399649277129701}
   run: {fileID: 8675076670353831034}
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathSpriteRenderer: {fileID: 3547097025565909647}
+  animationDuration: 3
 --- !u!1 &1887320606608101077
 GameObject:
   m_ObjectHideFlags: 0

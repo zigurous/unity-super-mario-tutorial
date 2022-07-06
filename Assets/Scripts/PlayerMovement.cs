@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private float inputAxis;
 
     public float moveSpeed = 8f;
-    public float maxJumpHeight = 5f;
+    public float maxJumpHeight = 4.5f;
     public float maxJumpTime = 1f;
     public float jumpVelocity => (2f * maxJumpHeight) / (maxJumpTime / 2f);
     public float gravity => (-2f * maxJumpHeight) / Mathf.Pow(maxJumpTime / 2f, 2f);
