@@ -7,17 +7,24 @@ public class BlockHit : MonoBehaviour
     public float animationDuration = 0.125f;
     public int maxHits = -1;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private bool animating;
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (!animating && collision.gameObject.CompareTag("Player"))
         {
-            GetComponent<SpriteRenderer>().enabled = true;
-            StartCoroutine(Animate());
+            if (collision.transform.DotTest(transform, Vector2.up))
+            {
+                GetComponent<SpriteRenderer>().enabled = true;
+                StartCoroutine(Animate());
+            }
         }
     }
 
     private IEnumerator Animate()
     {
+        animating = true;
+
         Vector3 restingPosition = transform.localPosition;
         Vector3 animatedPosition = restingPosition + new Vector3(0, offset, 0);
 
@@ -29,6 +36,8 @@ public class BlockHit : MonoBehaviour
         if (maxHits == 0) {
             Destroy(this);
         }
+
+        animating = false;
     }
 
     private IEnumerator Animate(Vector2 from, Vector2 to)

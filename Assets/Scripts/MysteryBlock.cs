@@ -5,10 +5,13 @@ public class MysteryBlock : MonoBehaviour
     public PowerUp powerUp;
     public Sprite emptyBlock;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.CompareTag("Player")) {
-            Reveal();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.transform.DotTest(transform, Vector2.up)) {
+                Reveal();
+            }
         }
     }
 

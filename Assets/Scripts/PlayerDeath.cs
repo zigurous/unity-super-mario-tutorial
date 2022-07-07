@@ -8,12 +8,15 @@ public class PlayerDeath : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
-            StartCoroutine(Animate());
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            if (!transform.DotTest(collision.transform, Vector2.down)) {
+                StartCoroutine(DeathAnimation());
+            }
         }
     }
 
-    private IEnumerator Animate()
+    private IEnumerator DeathAnimation()
     {
         float elapsed = 0f;
 

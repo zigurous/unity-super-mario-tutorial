@@ -61,8 +61,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded) {
             GroundedMovement();
-        } else {
-            AirborneMovement();
         }
 
         ApplyGravity();
@@ -124,14 +122,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void AirborneMovement()
-    {
-        // check if bonked head
-        if (velocity.y > 0f && rigidbody.Raycast(Vector2.up)) {
-            velocity.y = 0f;
-        }
-    }
-
     private void ApplyGravity()
     {
         // check if falling
@@ -143,14 +133,23 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = Mathf.Max(velocity.y, gravity / 2f);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        // check if mario is falling onto the head of an enemy
-        if (falling && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             // bounce off enemy head
-            velocity.y = jumpVelocity / 2f;
-            jumping = true;
+            if (transform.DotTest(collision.transform, Vector2.down))
+            {
+                velocity.y = jumpVelocity / 2f;
+                jumping = true;
+            }
+        }
+        else
+        {
+            // stop vertical movement if mario bonks his head
+            if (transform.DotTest(collision.transform, Vector2.up)) {
+                velocity.y = 0f;
+            }
         }
     }
 
