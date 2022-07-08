@@ -39,9 +39,10 @@ public class Pipe : MonoBehaviour
         mario.GetComponent<PlayerMovement>().enabled = true;
     }
 
-    private IEnumerator MoveToPosition(Transform mario, Vector3 endPosition, float duration = 1f)
+    private IEnumerator MoveToPosition(Transform mario, Vector3 endPosition)
     {
         float elapsed = 0f;
+        float duration = 1f;
 
         Vector3 startPosition = mario.position;
 

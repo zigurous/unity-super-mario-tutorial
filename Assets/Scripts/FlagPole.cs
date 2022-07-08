@@ -17,11 +17,11 @@ public class FlagPole : MonoBehaviour
         }
     }
 
-    private IEnumerator MoveToPosition(Transform transform, Vector2 position)
+    private IEnumerator MoveToPosition(Transform transform, Vector3 position)
     {
-        while (Vector2.Distance(transform.position, position) > 0.125f)
+        while (Vector3.Distance(transform.position, position) > 0.125f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, position, speed * Time.deltaTime);
             yield return null;
         }
 

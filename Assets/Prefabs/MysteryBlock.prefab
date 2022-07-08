@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3249715635291859842}
   - component: {fileID: 6204630829413145907}
   - component: {fileID: 8090422394729228968}
-  - component: {fileID: 1692460456149033193}
   - component: {fileID: 5197151675358696834}
   m_Layer: 0
   m_Name: MysteryBlock
@@ -111,20 +110,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1692460456149033193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9166230116066908815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6bc3357dc7479e43a7e4ad43299aad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerUp: {fileID: 841438207429839042, guid: 8268706537ea4644a879746713c1ec55, type: 3}
-  emptyBlock: {fileID: 21300000, guid: 0c057401fbf74454fa3032deae7f0a61, type: 3}
 --- !u!114 &5197151675358696834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6434a9b82fac34c854a326b20307fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 0.5
-  animationDuration: 0.125
+  item: {fileID: 841438207429839045, guid: 2f45153d43a6e8449b8dca55e0850b64, type: 3}
+  emptyBlock: {fileID: 21300000, guid: 0c057401fbf74454fa3032deae7f0a61, type: 3}
   maxHits: 1

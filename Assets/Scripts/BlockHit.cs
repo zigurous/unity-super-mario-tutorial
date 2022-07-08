@@ -3,21 +3,38 @@ using UnityEngine;
 
 public class BlockHit : MonoBehaviour
 {
-    public float offset = 0.5f;
-    public float animationDuration = 0.125f;
+    public GameObject item;
+    public Sprite emptyBlock;
     public int maxHits = -1;
-
     private bool animating;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!animating && collision.gameObject.CompareTag("Player"))
         {
-            if (collision.transform.DotTest(transform, Vector2.up))
-            {
-                GetComponent<SpriteRenderer>().enabled = true;
-                StartCoroutine(Animate());
+            if (collision.transform.DotTest(transform, Vector2.up)) {
+                Hit();
             }
+        }
+    }
+
+    private void Hit()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = true;
+
+        StartCoroutine(Animate());
+
+        if (item != null) {
+            Instantiate(item, transform.position + Vector3.up, Quaternion.identity);
+        }
+
+        maxHits--;
+
+        if (maxHits == 0)
+        {
+            spriteRenderer.sprite = emptyBlock;
+            Destroy(this);
         }
     }
 
@@ -26,27 +43,22 @@ public class BlockHit : MonoBehaviour
         animating = true;
 
         Vector3 restingPosition = transform.localPosition;
-        Vector3 animatedPosition = restingPosition + new Vector3(0, offset, 0);
+        Vector3 animatedPosition = restingPosition + Vector3.up * 0.5f;
 
-        yield return Animate(restingPosition, animatedPosition);
-        yield return Animate(animatedPosition, restingPosition);
-
-        maxHits--;
-
-        if (maxHits == 0) {
-            Destroy(this);
-        }
+        yield return Move(restingPosition, animatedPosition);
+        yield return Move(animatedPosition, restingPosition);
 
         animating = false;
     }
 
-    private IEnumerator Animate(Vector2 from, Vector2 to)
+    private IEnumerator Move(Vector3 from, Vector3 to)
     {
         float elapsed = 0f;
+        float duration = 0.125f;
 
-        while (elapsed < animationDuration)
+        while (elapsed < duration)
         {
-            float t = elapsed / animationDuration;
+            float t = elapsed / duration;
 
             transform.localPosition = Vector3.Lerp(from, to, t);
             elapsed += Time.deltaTime;
