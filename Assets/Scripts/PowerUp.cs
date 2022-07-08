@@ -12,6 +12,13 @@ public class PowerUp : MonoBehaviour
 
     public Type type;
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player")) {
+            Collect();
+        }
+    }
+
     private void Collect()
     {
         switch (type)
@@ -31,13 +38,6 @@ public class PowerUp : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player")) {
-            Collect();
-        }
     }
 
 }

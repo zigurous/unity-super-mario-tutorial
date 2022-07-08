@@ -21,7 +21,7 @@ public class BlockCoin : MonoBehaviour
     private IEnumerator MoveToPosition(Vector3 endPosition)
     {
         float elapsed = 0f;
-        float duration = 0.3125f;
+        float duration = 0.25f;
 
         Vector3 startPosition = transform.position;
 

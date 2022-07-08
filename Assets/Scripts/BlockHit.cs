@@ -10,7 +10,7 @@ public class BlockHit : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!animating && collision.gameObject.CompareTag("Player"))
+        if (!animating && maxHits != 0 && collision.gameObject.CompareTag("Player"))
         {
             if (collision.transform.DotTest(transform, Vector2.up)) {
                 Hit();
@@ -21,21 +21,19 @@ public class BlockHit : MonoBehaviour
     private void Hit()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.enabled = true;
-
-        StartCoroutine(Animate());
-
-        if (item != null) {
-            Instantiate(item, transform.position + Vector3.up, Quaternion.identity);
-        }
+        spriteRenderer.enabled = true; // show if hidden
 
         maxHits--;
 
-        if (maxHits == 0)
-        {
+        if (maxHits == 0) {
             spriteRenderer.sprite = emptyBlock;
-            Destroy(this);
         }
+
+        if (item != null) {
+            Instantiate(item, transform.position, Quaternion.identity);
+        }
+
+        StartCoroutine(Animate());
     }
 
     private IEnumerator Animate()
