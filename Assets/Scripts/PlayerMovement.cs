@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
                 jumping = true;
             }
         }
-        else
+        else if (collision.gameObject.layer != LayerMask.NameToLayer("PowerUp"))
         {
             // stop vertical movement if mario bonks his head
             if (transform.DotTest(collision.transform, Vector2.up)) {
