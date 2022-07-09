@@ -6,7 +6,7 @@ public class FlagPole : MonoBehaviour
     public GameObject flag;
     public Transform poleBottom;
     public Transform castle;
-    public float speed = 8f;
+    public float speed = 6f;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
