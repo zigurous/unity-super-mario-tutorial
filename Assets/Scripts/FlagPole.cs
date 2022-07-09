@@ -36,9 +36,10 @@ public class FlagPole : MonoBehaviour
         yield return MoveToPosition(mario, mario.position + Vector3.right);
         yield return MoveToPosition(mario, mario.position + Vector3.right + Vector3.down);
         yield return MoveToPosition(mario, castle.position);
-        yield return new WaitForSeconds(0.25f);
 
         mario.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(1f);
 
         GameManager.Instance.NextLevel();
     }
