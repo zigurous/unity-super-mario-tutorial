@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 1608222014282682262}
   - component: {fileID: 1608222014282682257}
   - component: {fileID: 1608222014282682256}
-  - component: {fileID: 1614318801755108934}
+  - component: {fileID: 5276464284973727427}
   - component: {fileID: 6378279572090380676}
   - component: {fileID: 4360298837813108587}
   - component: {fileID: -3522674434609423501}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Starman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 05f74dad61d710a47829319d0dd5d0d2, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -125,8 +125,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.125}
   serializedVersion: 2
   m_Radius: 0.375
---- !u!58 &1614318801755108934
-CircleCollider2D:
+--- !u!61 &5276464284973727427
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -139,8 +139,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!114 &6378279572090380676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  initialDirection: {x: 1, y: 0}
+  direction: {x: 1, y: 0}
 --- !u!114 &-3522674434609423501
 MonoBehaviour:
   m_ObjectHideFlags: 0

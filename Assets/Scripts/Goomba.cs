@@ -9,12 +9,21 @@ public class Goomba : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             if (collision.transform.DotTest(transform, Vector2.down)) {
-                Death();
+                Flatten();
+            } else {
+                collision.gameObject.GetComponent<PlayerDeath>().enabled = true;
             }
         }
     }
 
-    private void Death()
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Shell")) {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Flatten()
     {
         GetComponent<Rigidbody2D>().isKinematic = true;
         GetComponent<Collider2D>().enabled = false;

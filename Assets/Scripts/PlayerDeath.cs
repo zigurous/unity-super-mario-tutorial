@@ -6,14 +6,9 @@ public class PlayerDeath : MonoBehaviour
     public SpriteRenderer deathSpriteRenderer;
     public float animationDuration = 3f;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void Start()
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            if (!transform.DotTest(collision.transform, Vector2.down)) {
-                StartCoroutine(DeathAnimation());
-            }
-        }
+        StartCoroutine(DeathAnimation());
     }
 
     private IEnumerator DeathAnimation()

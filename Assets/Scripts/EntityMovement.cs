@@ -5,21 +5,15 @@ using UnityEngine;
 public class EntityMovement : MonoBehaviour
 {
     public float speed = 1f;
-    public Vector2 initialDirection = Vector2.left;
+    public Vector2 direction = Vector2.left;
 
     private new Rigidbody2D rigidbody;
-    private Vector2 direction;
     private Vector2 velocity;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         enabled = false;
-    }
-
-    private void Start()
-    {
-        direction = initialDirection;
     }
 
     private void OnBecameVisible()
@@ -30,6 +24,17 @@ public class EntityMovement : MonoBehaviour
     private void OnBecameInvisible()
     {
         enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        rigidbody.WakeUp();
+    }
+
+    private void OnDisable()
+    {
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.Sleep();
     }
 
     private void FixedUpdate()

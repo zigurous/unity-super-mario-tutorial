@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4036622396060348869}
   - component: {fileID: 8863421987694266431}
   - component: {fileID: 1326665629888359022}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Goomba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,9 +121,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.125}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.375
+  m_Radius: 0.5
 --- !u!114 &4036622396060348869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  initialDirection: {x: -1, y: 0}
+  direction: {x: -1, y: 0}
 --- !u!114 &8863421987694266431
 MonoBehaviour:
   m_ObjectHideFlags: 0
