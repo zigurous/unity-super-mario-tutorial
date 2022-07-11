@@ -92,7 +92,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1466478353442120373}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 05f74dad61d710a47829319d0dd5d0d2, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -185,7 +185,6 @@ MonoBehaviour:
   enterKeyCode: 100
   enterDirection: {x: 1, y: 0, z: 0}
   exitDirection: {x: 0, y: 1, z: 0}
-  animationDuration: 1
 --- !u!1 &6798103478261357143
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +278,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6798103478261357143}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 05f74dad61d710a47829319d0dd5d0d2, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -305,7 +304,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6798103478261357143}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 05f74dad61d710a47829319d0dd5d0d2, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
