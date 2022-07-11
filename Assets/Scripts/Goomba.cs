@@ -11,7 +11,7 @@ public class Goomba : MonoBehaviour
             if (collision.transform.DotTest(transform, Vector2.down)) {
                 Flatten();
             } else {
-                collision.gameObject.GetComponent<PlayerDeath>().enabled = true;
+                collision.gameObject.GetComponent<Player>().Hit();
             }
         }
     }
@@ -19,18 +19,23 @@ public class Goomba : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Shell")) {
-            Destroy(gameObject);
+            Hit();
         }
     }
 
     private void Flatten()
     {
-        GetComponent<Rigidbody2D>().isKinematic = true;
         GetComponent<Collider2D>().enabled = false;
         GetComponent<EntityMovement>().enabled = false;
         GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<SpriteRenderer>().sprite = flatSprite;
         Destroy(gameObject, 0.5f);
+    }
+
+    private void Hit()
+    {
+        GetComponent<DeathAnimation>().enabled = true;
+        Destroy(gameObject, 5f);
     }
 
 }

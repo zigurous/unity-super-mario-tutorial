@@ -28,18 +28,18 @@ public class FlagPole : MonoBehaviour
         transform.position = position;
     }
 
-    private IEnumerator LevelCompleteSequence(Transform mario)
+    private IEnumerator LevelCompleteSequence(Transform player)
     {
-        mario.GetComponent<PlayerMovement>().enabled = false;
+        player.GetComponent<Player>().enabled = false;
 
-        yield return MoveToPosition(mario, poleBottom.position);
-        yield return MoveToPosition(mario, mario.position + Vector3.right);
-        yield return MoveToPosition(mario, mario.position + Vector3.right + Vector3.down);
-        yield return MoveToPosition(mario, castle.position);
+        yield return MoveToPosition(player, poleBottom.position);
+        yield return MoveToPosition(player, player.position + Vector3.right);
+        yield return MoveToPosition(player, player.position + Vector3.right + Vector3.down);
+        yield return MoveToPosition(player, castle.position);
 
-        mario.gameObject.SetActive(false);
+        player.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         GameManager.Instance.NextLevel();
     }

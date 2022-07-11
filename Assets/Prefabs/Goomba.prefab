@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4953937513092463114}
   - component: {fileID: 2262214753697499689}
   - component: {fileID: 3476804150155684021}
+  - component: {fileID: 1326665629888359022}
   - component: {fileID: 4036622396060348869}
   - component: {fileID: 8863421987694266431}
-  - component: {fileID: 1326665629888359022}
+  - component: {fileID: 7896048874926067572}
   m_Layer: 7
   m_Name: Goomba
   m_TagString: Untagged
@@ -124,6 +125,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1326665629888359022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4953937513092463115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c550231955bbf05489a5cf417ee2af13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flatSprite: {fileID: 21300000, guid: dceda839fbcc74441aef5f93f32bdc1a, type: 3}
 --- !u!114 &4036622396060348869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,16 +168,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 56edcd414648ccd46810c8fb8d71f38f, type: 3}
   - {fileID: 21300000, guid: 2ecd82c9f9059ce4d90acf918c441096, type: 3}
   framerate: 0.25
---- !u!114 &1326665629888359022
+--- !u!114 &7896048874926067572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4953937513092463115}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c550231955bbf05489a5cf417ee2af13, type: 3}
+  m_Script: {fileID: 11500000, guid: 97e2bf4ee2610414084931f65ffb0160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flatSprite: {fileID: 21300000, guid: dceda839fbcc74441aef5f93f32bdc1a, type: 3}
+  spriteRenderer: {fileID: 4953937513092463114}
+  deadSprite: {fileID: 0}

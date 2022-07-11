@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -13,17 +12,6 @@ public class AnimatedSprite : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        enabled = false;
-    }
-
-    private void OnBecameVisible()
-    {
-        enabled = !EditorApplication.isPaused;
-    }
-
-    private void OnBecameInvisible()
-    {
-        enabled = false;
     }
 
     private void OnEnable()

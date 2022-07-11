@@ -15,7 +15,7 @@ public class Koopa : MonoBehaviour
             if (collision.transform.DotTest(transform, Vector2.down)) {
                 EnterShell();
             }  else {
-                collision.gameObject.GetComponent<PlayerDeath>().enabled = true;
+                collision.gameObject.GetComponent<Player>().Hit();
             }
         }
     }
@@ -27,11 +27,11 @@ public class Koopa : MonoBehaviour
             if (!shellMoving)
             {
                 Vector2 direction = new Vector2(transform.position.x - other.transform.position.x, 0f);
-                HitShell(direction);
+                PushShell(direction);
             }
             else
             {
-                other.gameObject.GetComponent<PlayerDeath>().enabled = true;
+                other.GetComponent<Player>().Hit();
             }
         }
     }
@@ -40,12 +40,12 @@ public class Koopa : MonoBehaviour
     {
         shelled = true;
 
-        Destroy(GetComponent<AnimatedSprite>());
         GetComponent<SpriteRenderer>().sprite = shellSprite;
+        GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<EntityMovement>().enabled = false;
     }
 
-    private void HitShell(Vector2 direction)
+    private void PushShell(Vector2 direction)
     {
         shellMoving = true;
 

@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 3611261760737888595}
   - component: {fileID: 3611261760737888592}
   - component: {fileID: 1760482234318092036}
+  - component: {fileID: 3611261760737888607}
   - component: {fileID: 3611261760737888596}
   - component: {fileID: 3611261760737888597}
-  - component: {fileID: 3611261760737888607}
+  - component: {fileID: 2152708057463308329}
   m_Layer: 7
   m_Name: Koopa
   m_TagString: Untagged
@@ -151,6 +152,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.25, y: 1.25}
   m_EdgeRadius: 0
+--- !u!114 &3611261760737888607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611261760737888598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72413bef4775a9c4395c12b090e9f38c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shellSprite: {fileID: 21300000, guid: f882caca8db1d9547be2c030f5a6b82e, type: 3}
+  shellSpeed: 12
 --- !u!114 &3611261760737888596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,17 +196,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8b6997b812bbe4840ae3afbb20f2312b, type: 3}
   - {fileID: 21300000, guid: abbbfac621fc9c549b0e50177934ecfc, type: 3}
   framerate: 0.25
---- !u!114 &3611261760737888607
+--- !u!114 &2152708057463308329
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3611261760737888598}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72413bef4775a9c4395c12b090e9f38c, type: 3}
+  m_Script: {fileID: 11500000, guid: 97e2bf4ee2610414084931f65ffb0160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shellSprite: {fileID: 21300000, guid: f882caca8db1d9547be2c030f5a6b82e, type: 3}
-  shellSpeed: 12
+  spriteRenderer: {fileID: 3611261760737888594}
+  deadSprite: {fileID: 0}

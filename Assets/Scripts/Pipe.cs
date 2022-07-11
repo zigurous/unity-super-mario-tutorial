@@ -18,45 +18,45 @@ public class Pipe : MonoBehaviour
         }
     }
 
-    private IEnumerator Enter(Transform mario)
+    private IEnumerator Enter(Transform player)
     {
-        mario.GetComponent<PlayerMovement>().enabled = false;
+        player.GetComponent<Player>().enabled = false;
 
         Vector3 enteredPosition = transform.position + enterDirection;
 
-        yield return MoveToPosition(mario, enteredPosition);
+        yield return MoveToPosition(player, enteredPosition);
         yield return new WaitForSeconds(1f);
 
         Camera.main.GetComponent<SideScrolling>().SetUnderground(connection.position.y < 0f);
 
         if (exitDirection != Vector3.zero)
         {
-            mario.position = connection.position - exitDirection;
-            yield return MoveToPosition(mario, connection.position + exitDirection);
+            player.position = connection.position - exitDirection;
+            yield return MoveToPosition(player, connection.position + exitDirection);
         }
 
-        mario.position = connection.position;
-        mario.GetComponent<PlayerMovement>().enabled = true;
+        player.position = connection.position;
+        player.GetComponent<Player>().enabled = true;
     }
 
-    private IEnumerator MoveToPosition(Transform mario, Vector3 endPosition)
+    private IEnumerator MoveToPosition(Transform player, Vector3 endPosition)
     {
         float elapsed = 0f;
         float duration = 1f;
 
-        Vector3 startPosition = mario.position;
+        Vector3 startPosition = player.position;
 
         while (elapsed < duration)
         {
             float t = elapsed / duration;
 
-            mario.position = Vector3.Lerp(startPosition, endPosition, t);
+            player.position = Vector3.Lerp(startPosition, endPosition, t);
             elapsed += Time.deltaTime;
 
             yield return null;
         }
 
-        mario.position = endPosition;
+        player.position = endPosition;
     }
 
 }

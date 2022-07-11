@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
         NewGame();
     }
 
@@ -58,6 +60,11 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         LoadLevel(world, stage + 1);
+    }
+
+    public void ResetLevel(float delay)
+    {
+        Invoke(nameof(ResetLevel), delay);
     }
 
     public void ResetLevel()
