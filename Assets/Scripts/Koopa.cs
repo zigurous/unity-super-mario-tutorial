@@ -12,10 +12,14 @@ public class Koopa : MonoBehaviour
     {
         if (!shelled && collision.gameObject.CompareTag("Player"))
         {
-            if (collision.transform.DotTest(transform, Vector2.down)) {
+            Player player = collision.gameObject.GetComponent<Player>();
+
+            if (player.starpower) {
+                Hit();
+            } else if (collision.transform.DotTest(transform, Vector2.down)) {
                 EnterShell();
             }  else {
-                collision.gameObject.GetComponent<Player>().Hit();
+                player.Hit();
             }
         }
     }
@@ -31,7 +35,13 @@ public class Koopa : MonoBehaviour
             }
             else
             {
-                other.GetComponent<Player>().Hit();
+                Player player = other.GetComponent<Player>();
+
+                if (player.starpower) {
+                    Hit();
+                } else {
+                    player.Hit();
+                }
             }
         }
     }
@@ -57,6 +67,12 @@ public class Koopa : MonoBehaviour
         movement.enabled = true;
 
         gameObject.layer = LayerMask.NameToLayer("Shell");
+    }
+
+    private void Hit()
+    {
+        GetComponent<DeathAnimation>().enabled = true;
+        Destroy(gameObject, 3f);
     }
 
     private void OnBecameInvisible()
