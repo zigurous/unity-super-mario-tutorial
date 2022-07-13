@@ -4,6 +4,6 @@
 
 - **Difficulty**: Advanced
 - **Topics**: Physics, Side-scrolling, Levels
-- **Version**: Unity 2020.3 (LTS)
+- **Version**: Unity 2021.3 (LTS)
 - [**Download**](https://github.com/zigurous/unity-super-mario-tutorial/archive/refs/heads/main.zip)
 - [**Watch Video**](https://www.youtube.com/c/zigurous)
