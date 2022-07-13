@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 8f;
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
-    public float jumpVelocity => (2f * maxJumpHeight) / (maxJumpTime / 2f);
+    public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 2f);
     public float gravity => (-2f * maxJumpHeight) / Mathf.Pow(maxJumpTime / 2f, 2f);
 
     public bool grounded { get; private set; }
@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         // perform jump
         if (Input.GetButtonDown("Jump"))
         {
-            velocity.y = jumpVelocity;
+            velocity.y = jumpForce;
             jumping = true;
         }
     }
@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
             // bounce off enemy head
             if (transform.DotTest(collision.transform, Vector2.down))
             {
-                velocity.y = jumpVelocity / 2f;
+                velocity.y = jumpForce / 2f;
                 jumping = true;
             }
         }
