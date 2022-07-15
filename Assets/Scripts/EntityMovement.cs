@@ -18,7 +18,11 @@ public class EntityMovement : MonoBehaviour
 
     private void OnBecameVisible()
     {
+        #if UNITY_EDITOR
         enabled = !EditorApplication.isPaused;
+        #else
+        enabled = true;
+        #endif
     }
 
     private void OnBecameInvisible()
