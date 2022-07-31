@@ -6,7 +6,7 @@ public class Koopa : MonoBehaviour
     public float shellSpeed = 12f;
 
     private bool shelled;
-    private bool shellMoving;
+    private bool pushed;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -28,7 +28,7 @@ public class Koopa : MonoBehaviour
     {
         if (shelled && other.CompareTag("Player"))
         {
-            if (!shellMoving)
+            if (!pushed)
             {
                 Vector2 direction = new Vector2(transform.position.x - other.transform.position.x, 0f);
                 PushShell(direction);
@@ -44,6 +44,10 @@ public class Koopa : MonoBehaviour
                 }
             }
         }
+        else if (!shelled && other.gameObject.layer == LayerMask.NameToLayer("Shell"))
+        {
+            Hit();
+        }
     }
 
     private void EnterShell()
@@ -57,7 +61,7 @@ public class Koopa : MonoBehaviour
 
     private void PushShell(Vector2 direction)
     {
-        shellMoving = true;
+        pushed = true;
 
         GetComponent<Rigidbody2D>().isKinematic = false;
 
@@ -71,13 +75,14 @@ public class Koopa : MonoBehaviour
 
     private void Hit()
     {
+        GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<DeathAnimation>().enabled = true;
         Destroy(gameObject, 3f);
     }
 
     private void OnBecameInvisible()
     {
-        if (shelled) {
+        if (pushed) {
             Destroy(gameObject);
         }
     }

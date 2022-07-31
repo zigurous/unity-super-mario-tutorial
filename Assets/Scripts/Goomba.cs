@@ -38,6 +38,7 @@ public class Goomba : MonoBehaviour
 
     private void Hit()
     {
+        GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<DeathAnimation>().enabled = true;
         Destroy(gameObject, 3f);
     }

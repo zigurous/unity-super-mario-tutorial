@@ -64,7 +64,6 @@ public class DeathAnimation : MonoBehaviour
         float gravity = -36f;
 
         Vector3 velocity = Vector3.up * jumpVelocity;
-        Vector3 bottomEdge = Camera.main.ScreenToWorldPoint(Vector3.zero);
 
         while (elapsed < duration)
         {
