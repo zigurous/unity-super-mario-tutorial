@@ -12,30 +12,31 @@ public class BlockCoin : MonoBehaviour
 
     private IEnumerator Animate()
     {
-        yield return MoveToPosition(transform.position + Vector3.up * 2f);
-        yield return MoveToPosition(transform.position + Vector3.down * 2f);
+        Vector3 restingPosition = transform.localPosition;
+        Vector3 animatedPosition = restingPosition + Vector3.up * 2f;
+
+        yield return Move(restingPosition, animatedPosition);
+        yield return Move(animatedPosition, restingPosition);
 
         Destroy(gameObject);
     }
 
-    private IEnumerator MoveToPosition(Vector3 endPosition)
+    private IEnumerator Move(Vector3 from, Vector3 to)
     {
         float elapsed = 0f;
         float duration = 0.25f;
-
-        Vector3 startPosition = transform.position;
 
         while (elapsed < duration)
         {
             float t = elapsed / duration;
 
-            transform.position = Vector3.Lerp(startPosition, endPosition, t);
+            transform.localPosition = Vector3.Lerp(from, to, t);
             elapsed += Time.deltaTime;
 
             yield return null;
         }
 
-        transform.position = endPosition;
+        transform.localPosition = to;
     }
 
 }
