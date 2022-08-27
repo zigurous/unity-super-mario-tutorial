@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody.isKinematic = false;
         collider.enabled = true;
         velocity = Vector2.zero;
+        jumping = false;
     }
 
     private void OnDisable()
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody.isKinematic = true;
         collider.enabled = false;
         velocity = Vector2.zero;
+        jumping = false;
     }
 
     private void Update()
