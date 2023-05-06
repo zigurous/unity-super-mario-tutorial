@@ -18,7 +18,17 @@ public class PlayerSpriteRenderer : MonoBehaviour
 
     private void LateUpdate()
     {
+        float speed = Mathf.Abs(movement.getVelocityX());
+
         run.enabled = movement.running;
+
+        // By checking if the speed is greater than or equal to Mathf.Epsilon,
+        // we can apply the default framerate of the run animation to cutscenes if needed.
+        if(speed >= Mathf.Epsilon) {
+            run.framerate = 1 / (6f * Mathf.Sqrt(speed));
+        }else {
+            run.framerate = 1 / 6f;
+        }
 
         if (movement.jumping) {
             spriteRenderer.sprite = jump;
@@ -39,5 +49,4 @@ public class PlayerSpriteRenderer : MonoBehaviour
         spriteRenderer.enabled = false;
         run.enabled = false;
     }
-
 }

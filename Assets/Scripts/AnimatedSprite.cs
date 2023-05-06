@@ -4,7 +4,9 @@ using UnityEngine;
 public class AnimatedSprite : MonoBehaviour
 {
     public Sprite[] sprites;
-    public float framerate = 1f / 6f;
+    public float framerate = 1 / 6f;
+
+    private float time = 0;
 
     private SpriteRenderer spriteRenderer;
     private int frame;
@@ -14,14 +16,14 @@ public class AnimatedSprite : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        InvokeRepeating(nameof(Animate), framerate, framerate);
-    }
+        time += Time.deltaTime;
 
-    private void OnDisable()
-    {
-        CancelInvoke();
+        if(framerate <= time) {
+            time = 0;
+            Animate();
+        }
     }
 
     private void Animate()
