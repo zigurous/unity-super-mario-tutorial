@@ -8,7 +8,7 @@ public class SideScrolling : MonoBehaviour
 
     public float height = 6.5f;
     public float undergroundHeight = -9.5f;
-    public float undergroundThreshold = -2f;
+    public float undergroundThreshold = 0f;
 
     private void Awake()
     {

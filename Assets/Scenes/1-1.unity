@@ -2246,7 +2246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: 6.5
   undergroundHeight: -9.5
-  undergroundThreshold: -2
+  undergroundThreshold: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
