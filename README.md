@@ -5,4 +5,4 @@
 - **Topics**: Physics, Level Design, Game Feel
 - **Version**: Unity 2021.3 (LTS)
 - [**Download**](https://github.com/zigurous/unity-super-mario-tutorial/archive/refs/heads/main.zip)
-- [**Video Series**](https://youtube.com/playlist?list=PLqlFiJjSZ2x1mrMpSQgYdRm8PyWRTg6He)
+- [**Video Playlist**](https://youtube.com/playlist?list=PLqlFiJjSZ2x1mrMpSQgYdRm8PyWRTg6He)
