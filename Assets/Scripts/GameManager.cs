@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetLevel(float delay)
     {
+        CancelInvoke(nameof(ResetLevel));
         Invoke(nameof(ResetLevel), delay);
     }
 
