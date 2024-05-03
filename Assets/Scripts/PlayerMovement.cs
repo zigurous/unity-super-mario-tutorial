@@ -22,6 +22,10 @@ public class PlayerMovement : MonoBehaviour
     public bool sliding => (inputAxis > 0f && velocity.x < 0f) || (inputAxis < 0f && velocity.x > 0f);
     public bool falling => velocity.y < 0f && !grounded;
 
+    public float getVelocityX() {
+        return velocity.x;
+    }
+
     private void Awake()
     {
         camera = Camera.main;
