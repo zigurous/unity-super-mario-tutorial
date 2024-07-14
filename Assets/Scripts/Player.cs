@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public CapsuleCollider2D capsuleCollider { get; private set; }
+    public PlayerMovement movement { get; private set; }
+    public DeathAnimation deathAnimation { get; private set; }
+
     public PlayerSpriteRenderer smallRenderer;
     public PlayerSpriteRenderer bigRenderer;
     private PlayerSpriteRenderer activeRenderer;
-
-    public CapsuleCollider2D capsuleCollider { get; private set; }
-    public DeathAnimation deathAnimation { get; private set; }
 
     public bool big => bigRenderer.enabled;
     public bool dead => deathAnimation.enabled;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         capsuleCollider = GetComponent<CapsuleCollider2D>();
+        movement = GetComponent<PlayerMovement>();
         deathAnimation = GetComponent<DeathAnimation>();
         activeRenderer = smallRenderer;
     }

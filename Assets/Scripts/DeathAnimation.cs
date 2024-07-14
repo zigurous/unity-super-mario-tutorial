@@ -37,20 +37,19 @@ public class DeathAnimation : MonoBehaviour
     {
         Collider2D[] colliders = GetComponents<Collider2D>();
 
-        foreach (Collider2D collider in colliders) {
-            collider.enabled = false;
+        for (int i = 0; i < colliders.Length; i++) {
+            colliders[i].enabled = false;
         }
 
-        GetComponent<Rigidbody2D>().isKinematic = true;
+        if (TryGetComponent(out Rigidbody2D rigidbody)) {
+            rigidbody.isKinematic = true;
+        }
 
-        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-        EntityMovement entityMovement = GetComponent<EntityMovement>();
-
-        if (playerMovement != null) {
+        if (TryGetComponent(out PlayerMovement playerMovement)) {
             playerMovement.enabled = false;
         }
 
-        if (entityMovement != null) {
+        if (TryGetComponent(out EntityMovement entityMovement)) {
             entityMovement.enabled = false;
         }
     }

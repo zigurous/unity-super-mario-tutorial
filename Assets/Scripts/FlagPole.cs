@@ -12,21 +12,21 @@ public class FlagPole : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.TryGetComponent(out Player player))
         {
             StartCoroutine(MoveTo(flag, poleBottom.position));
-            StartCoroutine(LevelCompleteSequence(other.transform));
+            StartCoroutine(LevelCompleteSequence(player));
         }
     }
 
-    private IEnumerator LevelCompleteSequence(Transform player)
+    private IEnumerator LevelCompleteSequence(Player player)
     {
-        player.GetComponent<PlayerMovement>().enabled = false;
+        player.movement.enabled = false;
 
-        yield return MoveTo(player, poleBottom.position);
-        yield return MoveTo(player, player.position + Vector3.right);
-        yield return MoveTo(player, player.position + Vector3.right + Vector3.down);
-        yield return MoveTo(player, castle.position);
+        yield return MoveTo(player.transform, poleBottom.position);
+        yield return MoveTo(player.transform, player.transform.position + Vector3.right);
+        yield return MoveTo(player.transform, player.transform.position + Vector3.right + Vector3.down);
+        yield return MoveTo(player.transform, castle.position);
 
         player.gameObject.SetActive(false);
 

@@ -12,37 +12,37 @@ public class Pipe : MonoBehaviour
     {
         if (connection != null && other.CompareTag("Player"))
         {
-            if (Input.GetKey(enterKeyCode)) {
-                StartCoroutine(Enter(other.transform));
+            if (Input.GetKey(enterKeyCode) && other.TryGetComponent(out Player player)) {
+                StartCoroutine(Enter(player));
             }
         }
     }
 
-    private IEnumerator Enter(Transform player)
+    private IEnumerator Enter(Player player)
     {
-        player.GetComponent<PlayerMovement>().enabled = false;
+        player.movement.enabled = false;
 
         Vector3 enteredPosition = transform.position + enterDirection;
         Vector3 enteredScale = Vector3.one * 0.5f;
 
-        yield return Move(player, enteredPosition, enteredScale);
+        yield return Move(player.transform, enteredPosition, enteredScale);
         yield return new WaitForSeconds(1f);
 
-        var sideSrolling = Camera.main.GetComponent<SideScrolling>();
+        var sideSrolling = Camera.main.GetComponent<SideScrollingCamera>();
         sideSrolling.SetUnderground(connection.position.y < sideSrolling.undergroundThreshold);
 
         if (exitDirection != Vector3.zero)
         {
-            player.position = connection.position - exitDirection;
-            yield return Move(player, connection.position + exitDirection, Vector3.one);
+            player.transform.position = connection.position - exitDirection;
+            yield return Move(player.transform, connection.position + exitDirection, Vector3.one);
         }
         else
         {
-            player.position = connection.position;
-            player.localScale = Vector3.one;
+            player.transform.position = connection.position;
+            player.transform.localScale = Vector3.one;
         }
 
-        player.GetComponent<PlayerMovement>().enabled = true;
+        player.movement.enabled = true;
     }
 
     private IEnumerator Move(Transform player, Vector3 endPosition, Vector3 endScale)

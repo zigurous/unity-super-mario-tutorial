@@ -10,10 +10,8 @@ public class Koopa : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!shelled && collision.gameObject.CompareTag("Player"))
+        if (!shelled && collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out Player player))
         {
-            Player player = collision.gameObject.GetComponent<Player>();
-
             if (player.starpower) {
                 Hit();
             } else if (collision.transform.DotTest(transform, Vector2.down)) {
@@ -26,17 +24,15 @@ public class Koopa : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (shelled && other.CompareTag("Player"))
+        if (shelled && other.CompareTag("Player") && other.TryGetComponent(out Player player))
         {
             if (!pushed)
             {
-                Vector2 direction = new Vector2(transform.position.x - other.transform.position.x, 0f);
+                Vector2 direction = new(transform.position.x - other.transform.position.x, 0f);
                 PushShell(direction);
             }
             else
             {
-                Player player = other.GetComponent<Player>();
-
                 if (player.starpower) {
                     Hit();
                 } else {

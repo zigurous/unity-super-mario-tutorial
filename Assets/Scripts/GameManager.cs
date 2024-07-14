@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public int world { get; private set; }
-    public int stage { get; private set; }
-    public int lives { get; private set; }
-    public int coins { get; private set; }
+    public int world { get; private set; } = 1;
+    public int stage { get; private set; } = 1;
+    public int lives { get; private set; } = 3;
+    public int coins { get; private set; } = 0;
 
     private void Awake()
     {
@@ -30,7 +31,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = 60;
-
         NewGame();
     }
 
@@ -44,8 +44,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        // TODO: show game over screen
-
         NewGame();
     }
 
