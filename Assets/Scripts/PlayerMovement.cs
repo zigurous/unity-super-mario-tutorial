@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         rb.isKinematic = true;
         capsuleCollider.enabled = false;
         velocity = Vector2.zero;
+        inputAxis = 0f;
         jumping = false;
     }
 
