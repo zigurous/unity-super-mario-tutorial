@@ -14,11 +14,13 @@ public static class Extensions
             return false;
         }
 
-        float radius = 0.25f;
-        float distance = 0.375f;
+        Vector2 edge = rigidbody.ClosestPoint(rigidbody.position + direction);
+        float radius = (edge - rigidbody.position).magnitude / 2f;
+        float distance = radius + 0.125f;
 
-        RaycastHit2D hit = Physics2D.CircleCast(rigidbody.position, radius, direction.normalized, distance, layerMask);
-        return hit.collider != null && hit.rigidbody != rigidbody;
+        Vector2 point = rigidbody.position + (direction.normalized * distance);
+        Collider2D collider = Physics2D.OverlapCircle(point, radius, layerMask);
+        return collider != null && collider.attachedRigidbody != rigidbody;
     }
 
     // Checks if the transform is facing another transform in a given direction.

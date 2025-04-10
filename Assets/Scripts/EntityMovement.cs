@@ -48,14 +48,17 @@ public class EntityMovement : MonoBehaviour
 
         rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
 
-        if (rb.Raycast(direction)) {
-            direction = -direction;
-        }
-
+        // Reset y-velocity while grounded to prevent infinite build up of gravity
         if (rb.Raycast(Vector2.down)) {
             velocity.y = Mathf.Max(velocity.y, 0f);
         }
 
+        // Flip movement direction after hitting a wall
+        if (rb.Raycast(direction)) {
+            direction = -direction;
+        }
+
+        // Rotate the entity to face the direction of movement
         if (direction.x > 0f) {
             transform.localEulerAngles = new Vector3(0f, 180f, 0f);
         } else if (direction.x < 0f) {
